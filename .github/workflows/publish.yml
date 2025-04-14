@@ -1,23 +1,32 @@
-name: Publish
+name: "The Procrastination Publisher"
+description: "Releases your TODO library to the world, because someone has to enable procrastination at scale."
+
 on:
   release:
     types: [published]
   workflow_dispatch:
 
 jobs:
-  test:
-    uses: ./github/workflows/test.yml
+  run-tests:
+    name: "Pretending to Run Tests Before Publishing"
+    permissions:
+      contents: read
+    uses: ./.github/workflows/test.yml
 
   publish:
+    name: "Unleashing Procrastination Upon the World"
     runs-on: ubuntu-latest
-    needs: test
+    needs: [run-tests]
 
     permissions:
       contents: read
       id-token: write
 
     steps:
-      - uses: actions/checkout@v4
+      - name: "Checkout the code (reluctantly)"
+        uses: actions/checkout@v4
 
-      - name: Publish package
+      - name: "Publish package (because we can't procrastinate forever)"
         run: npx jsr publish
+        env:
+          NODE_DEBUG: "procrastination" # Enable detailed procrastination logging
