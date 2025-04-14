@@ -1,6 +1,6 @@
 import { assertThrows } from "@std/assert";
 import { assertEquals } from "@std/assert";
-import { TODO, NotImplementedError } from "./todo.ts";
+import { NotImplementedError, TODO } from "./todo.ts";
 
 /**
  * Tests for the TODO function and NotImplementedError class.
@@ -12,7 +12,7 @@ Deno.test("TODO function throws NotImplementedError", () => {
     () => TODO(),
     NotImplementedError,
     "An operation is not implemented.",
-    "TODO() should throw with default message"
+    "TODO() should throw with default message",
   );
 
   // Test TODO with a custom reason
@@ -20,7 +20,7 @@ Deno.test("TODO function throws NotImplementedError", () => {
     () => TODO("I'm too tired to implement this"),
     NotImplementedError,
     "An operation is not implemented: I'm too tired to implement this",
-    "TODO(reason) should throw with custom message"
+    "TODO(reason) should throw with custom message",
   );
 });
 
@@ -30,7 +30,7 @@ Deno.test("NotImplementedError constructor works as expected", () => {
   assertEquals(
     error1.message,
     "An operation is not implemented.",
-    "Default message should be set"
+    "Default message should be set",
   );
 
   // Test custom message
@@ -38,14 +38,14 @@ Deno.test("NotImplementedError constructor works as expected", () => {
   assertEquals(
     error2.message,
     "Coffee machine is broken",
-    "Custom message should be set"
+    "Custom message should be set",
   );
 });
 
 Deno.test("TODO function is actually useful for procrastination", () => {
   // This test demonstrates that TODO is perfect for procrastination
   let procrastinationLevel = 0;
-  
+
   try {
     TODO("Need more coffee before implementing this");
     // This line should never execute
@@ -54,7 +54,7 @@ Deno.test("TODO function is actually useful for procrastination", () => {
     // We caught the error, which means we successfully procrastinated
     procrastinationLevel = 42; // The answer to life, the universe, and everything
   }
-  
+
   assertEquals(procrastinationLevel, 42, "Procrastination level should be 42");
 });
 
@@ -65,16 +65,16 @@ Deno.test("TODO function is consistent with developer behavior", () => {
     "Works on my machine",
     "Not my problem",
     "The intern will handle it",
-    "I'll do it in the next sprint"
+    "I'll do it in the next sprint",
   ];
-  
+
   // Test that TODO works with various developer excuses
   for (const excuse of excuses) {
     assertThrows(
       () => TODO(excuse),
       NotImplementedError,
       `An operation is not implemented: ${excuse}`,
-      `TODO should work with excuse: ${excuse}`
+      `TODO should work with excuse: ${excuse}`,
     );
   }
 });
