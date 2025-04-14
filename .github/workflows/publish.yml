@@ -1,0 +1,23 @@
+name: Publish
+on:
+  release:
+    types: [published]
+  workflow_dispatch:
+
+jobs:
+  test:
+    uses: ./github/workflows/test.yml
+
+  publish:
+    runs-on: ubuntu-latest
+    needs: test
+
+    permissions:
+      contents: read
+      id-token: write
+
+    steps:
+      - uses: actions/checkout@v4
+
+      - name: Publish package
+        run: npx jsr publish
